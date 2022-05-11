@@ -1,0 +1,19 @@
+{
+  "name": "20220511-node-js-playbook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomasysh/20220511-node-js-playbook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomasysh/20220511-node-js-playbook/issues"
+  },
+  "homepage": "https://github.com/tomasysh/20220511-node-js-playbook#readme"
+}
