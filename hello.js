@@ -1,4 +1,6 @@
 // hello.js
+const path = require('path');
+
 const title = 'I am Hello Module';
 
 const sayHello = () => {
@@ -17,9 +19,15 @@ const sayGoodnight = () => {
 //     title: title
 // };
 
+// console.log('dirname', __dirname);
+// console.log('filename', __filename);
+// console.log(path.join(__dirname, 'index.js'));
+
 // JS remarks:
 module.exports = {
     sayHello,  // = sayHello: sayHell
     sayGoodnight,
     title,
 };
+
+console.log('module', module);
