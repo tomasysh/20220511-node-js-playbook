@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tomasysh/20220511-node-js-playbook/issues"
   },
-  "homepage": "https://github.com/tomasysh/20220511-node-js-playbook#readme"
+  "homepage": "https://github.com/tomasysh/20220511-node-js-playbook#readme",
+  "dependencies": {
+    "cowsay": "^1.5.0"
+  }
 }
