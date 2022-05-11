@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/tomasysh/20220511-node-js-playbook#readme",
   "dependencies": {
-    "cowsay": "^1.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
