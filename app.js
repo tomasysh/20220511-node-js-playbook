@@ -15,7 +15,7 @@ let sentences = ['Hello', 'World', 'I\'m a cow.'];
 sentences.forEach((sentence) => {
     console.log(cowsay.say({
         text : sentence,
-        e : "^^",
+        e : "==",
         T : "U "
     }));
 });
