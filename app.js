@@ -30,12 +30,16 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res) => {
     res.status(200)
-        .render('index');
+        .render('index', {
+            pageTitle: 'Book Your Books online'
+        });
 });
 
 app.get('/login', (req, res) => {
     res.status(200)
-        .render('login');
+        .render('login', {
+            pageTitle: 'Login'
+        });
 });
 
 app.post('/login', (req, res) => {
@@ -49,7 +53,9 @@ app.post('/login', (req, res) => {
 
 app.get('*', (req, res) => {
     res.status(404)
-        .render('404');
+        .render('404', {
+            pageTitle: 'Page Not Found'
+        });
 });
 
 app.listen(3000, () => {
