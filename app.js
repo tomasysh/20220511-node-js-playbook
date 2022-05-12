@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.status(200)
         .render('index', {
+            path: '/',
             pageTitle: 'Book Your Books online',
             products
         });
@@ -39,6 +40,7 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
     res.status(200)
         .render('login', {
+            path: '/login',
             pageTitle: 'Login'
         });
 });
