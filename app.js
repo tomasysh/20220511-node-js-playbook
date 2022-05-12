@@ -11,6 +11,8 @@ const express = require('express');
 const app = express();
 
 // middleware
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use((req, res, next) => {
 	console.log('Hello!');
     next();
