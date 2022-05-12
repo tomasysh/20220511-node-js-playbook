@@ -3,6 +3,7 @@ const path = require('path');
 
 // 第二個區塊 第三方模組(套件)
 const express = require('express');
+const bodyParser = require('body-parser');
 
 // 第三個區塊 自建模組
 
@@ -12,6 +13,7 @@ const app = express();
 
 // middleware
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
 	console.log('Hello!');
@@ -31,6 +33,15 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
     res.status(200)
         .sendFile(path.join(__dirname, 'views', 'login.html'));
+});
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    if (email && password) {
+        res.redirect('/');
+    } else {
+        console.log('欄位尚未填寫完成！')
+    }
 });
 
 app.listen(3000, () => {
