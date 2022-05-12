@@ -9,6 +9,13 @@
 </head>
 <body>
     <h1><%= pageTitle %></h1>
-    <img src="/images/logo.jpg" alt="">
+    <% if (products.length > 0) { %>
+        <% products.forEach((product) => { %>
+            <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+            <h3><%= product.title %></h3>
+        <% }) %>
+    <% } else { %>
+        <h1>尚無商品</h1>
+    <% } %>
 </body>
 </html>
