@@ -54,6 +54,11 @@ app.post('/login', (req, res) => {
     }
 });
 
+app.post('/logout', (req, res) => {
+    // TODO: 實作 logout 機制
+    res.redirect('/login');
+});
+
 app.get('*', (req, res) => {
     res.status(404)
         .render('404', {
