@@ -28,7 +28,8 @@ app.use(shopRoutes);
 app.use(errorRoutes);
 
 database
-	.sync()
+    // .sync()
+	.sync({ force: true })
 	.then((result) => {
         Product.bulkCreate(products);
 		app.listen(3000, () => {
