@@ -6,6 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 // 第三個區塊 自建模組
+const authRoutes = require('./routes/auth'); 
 
 ////////////////////////////////////////////////////////////////
 
@@ -37,27 +38,7 @@ app.get('/', (req, res) => {
         });
 });
 
-app.get('/login', (req, res) => {
-    res.status(200)
-        .render('login', {
-            path: '/login',
-            pageTitle: 'Login'
-        });
-});
-
-app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    if (email && password) {
-        res.redirect('/');
-    } else {
-        console.log('欄位尚未填寫完成！')
-    }
-});
-
-app.post('/logout', (req, res) => {
-    // TODO: 實作 logout 機制
-    res.redirect('/login');
-});
+app.use(authRoutes);
 
 app.get('*', (req, res) => {
     res.status(404)
