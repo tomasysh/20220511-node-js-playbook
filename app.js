@@ -10,6 +10,7 @@ const database = require('./utils/database');
 const authRoutes = require('./routes/auth'); 
 const shopRoutes = require('./routes/shop'); 
 const errorRoutes = require('./routes/404');
+const Product = require('./models/product');
 
 ////////////////////////////////////////////////////////////////
 
@@ -29,6 +30,7 @@ app.use(errorRoutes);
 database
 	.sync()
 	.then((result) => {
+        Product.bulkCreate(products);
 		app.listen(3000, () => {
 			console.log('Web Server is running on port 3000');
 		});
