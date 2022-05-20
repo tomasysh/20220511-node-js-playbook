@@ -26,17 +26,29 @@ const postLogin = (req, res) => {
     const { email, password } = req.body;
     User.findOne({ where: { email }})
         .then((user) => {
+            console.log('user', user);
             if (!user) {
-                req.flash('errorMessage', '錯誤的 Email 或 Password。');
+                req.flash('errorMessage', '錯誤的 Email 或 Password。')
                 return res.redirect('/login');
             }
-            if (user.password === password) {
-                console.log('login: 成功');
-                req.session.isLogin = true;
-                return res.redirect('/')
-            } 
-            req.flash('errorMessage', '錯誤的 Email 或 Password。');
-            res.redirect('/login');
+            bcryptjs
+                .compare(password, user.password)
+                .then((isMatch) => {
+                    console.log('isMatch', isMatch);
+                    if (isMatch) {
+                        req.session.user = user;
+                        req.session.isLogin = true;
+                        return req.session.save((err) => {
+                            console.log('postLogin - save session error: ', err);
+                            res.redirect('/');
+                        });
+                    }
+                    req.flash('errorMessage', '錯誤的 Email 或 Password。')
+                    res.redirect('/login');
+                })
+                .catch((err) => {
+                    return res.redirect('/login');
+                })
         })
         .catch((err) => {
             console.log('login error:', err);

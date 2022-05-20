@@ -50,7 +50,7 @@ app.use(errorRoutes);
 
 database
     // .sync()
-	.sync({ force: true })
+	.sync()
 	.then((result) => {
         // User.create({ displayName: 'Admin', email: 'admin@skoob.com', password: '11111111'});
         // Product.bulkCreate(products);
