@@ -3,9 +3,11 @@ const User = require('../models/user');
 ////////////////////////////////////////////////////////////////
 
 const getLogin = (req, res) => {
+    const errorMessage = req.flash('errorMessage')[0];
     res.status(200)
         .render('auth/login', {
-            pageTitle: 'Login'
+            pageTitle: 'Login',
+            errorMessage
         });
 };
 
@@ -14,7 +16,7 @@ const postLogin = (req, res) => {
     User.findOne({ where: { email }})
         .then((user) => {
             if (!user) {
-                console.log('login: 找不到此 user 或密碼錯誤');
+                req.flash('errorMessage', '錯誤的 Email 或 Password。');
                 return res.redirect('/login');
             }
             if (user.password === password) {
@@ -22,7 +24,7 @@ const postLogin = (req, res) => {
                 req.session.isLogin = true;
                 return res.redirect('/')
             } 
-            console.log('login: 找不到此 user 或密碼錯誤');
+            req.flash('errorMessage', '錯誤的 Email 或 Password。');
             res.redirect('/login');
         })
         .catch((err) => {
