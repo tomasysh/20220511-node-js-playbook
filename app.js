@@ -36,6 +36,7 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
+    res.locals.pageTitle = 'Book Your Books online';
     res.locals.path = req.url;
     res.locals.isLogin = req.session.isLogin || false;
     next();

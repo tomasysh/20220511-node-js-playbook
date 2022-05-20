@@ -7,8 +7,6 @@ const getIndex = (req, res) => {
         .then((products) => {
             res.status(200)
                 .render('index', {
-                    path: '/',
-                    pageTitle: 'Book Your Books online',
                     products
                 });
         })
