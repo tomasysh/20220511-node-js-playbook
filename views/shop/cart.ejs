@@ -12,11 +12,11 @@
                         <%= product.title %>
                         <small>(數量: <%= product.cartItem.quantity %>)</small>
                       </h5>
-                      <!-- <form action="/cart-delete-item" method="POST">
+                      <form action="/cart-delete-item" method="POST">
                         <input type="hidden" value="<%= product.id %>" name="productId">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                         <button class="btn btn-danger" type="submit">Delete</button>
-                      </form> -->
+                      </form>
                 </li>
                 <% }) %>
             </ul>
