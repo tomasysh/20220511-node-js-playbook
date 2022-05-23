@@ -65,7 +65,14 @@ const postSignup = (req, res) => {
             } else {
                 return bcryptjs.hash(password, 12)
                     .then((hashedPassword) => {
-                        return User.create({ displayName, email, password: hashedPassword });
+                        return User
+                            .create({ displayName, email, password: hashedPassword })
+                            .then((newUser) => {
+                                return newUser.createCart();
+                            })
+                            .catch((err) => {
+                                console.log('postSignup - newUser.carateCart error: ', err);
+                            });
                     })
                     .catch((err) => {
                         console.log('create new user error: ', err);
@@ -78,13 +85,13 @@ const postSignup = (req, res) => {
         .catch((err) => {
             console.log('signup_error', err);
         });
-}
+};
 
 const postLogout = (req, res) => {
     req.session.destroy((err) => {
         res.redirect('/login')
     });
-}
+};
 
 module.exports = {
     getLogin,
