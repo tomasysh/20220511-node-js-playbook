@@ -35,7 +35,53 @@ const getCart = (req, res) => {
         })
 };
 
+const postCartAddItem = (req, res) => {
+    const { productId } = req.body;
+    let userCart;
+    let newQuantity = 1;
+    req.user
+        .getCart()
+        .then((cart) => {
+            userCart = cart;
+            // NOTE: 檢查 product 是否已在 cart
+            return cart.getProducts({ where: { id: productId }});
+        })
+        .then((products) => {
+            let product;
+            if (products.length > 0) {
+                // NOTE: 本來購物車就有的商品，所以數量必定大於 1
+                product = products[0];
+                const oldQuantity = product.cartItem.quantity;
+                newQuantity = oldQuantity + 1;
+                return product;
+            }
+            return Product.findByPk(productId);
+        })
+        .then((product) => {
+            return userCart.addProduct(product, {
+                through: { quantity: newQuantity }
+            });
+        })
+        // NOT: 下面這段在處理 amount 總額
+        .then(() => {
+            return userCart.getProducts();
+        })
+        .then((products) => {
+            const productsSums = products.map((product) => product.price * product.cartItem.quantity);
+            const amount = productsSums.reduce((accumulator, currentValue) => accumulator + currentValue);
+            userCart.amount = amount;
+            return userCart.save();
+        })
+        .then(() => {
+            res.redirect('/cart');
+        })
+        .catch((err) => {
+            console.log('postCartAddItem error: ', err);
+        })
+};
+
 module.exports = {
     getIndex,
     getCart,
-}
+    postCartAddItem,
+};

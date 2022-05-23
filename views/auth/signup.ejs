@@ -24,6 +24,11 @@
         
               <div>
                 <label for="displayName" class="form-label">Display Name</label>
+                <!-- req.body ={
+                  displayName: 'Admin',
+                  email: 'admin@skoob.com',
+                  password: '11111111'
+                } -->
                 <input type="text" class="form-control" id="displayName" placeholder="Display Name" name="displayName" maxlength="20" required value="Admin">
                 <div class="invalid-feedback">
                     顯示名稱最長不得超過 20 字元。
@@ -31,7 +36,7 @@
               </div>
         
               <div>
-                <label for="email" class="form-label">Email</label>
+                <label for="card" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="example@com" name="email" required value="admin@skoob.com">
                 <div class="invalid-feedback">
                   請輸入合法的電子郵件地址。
