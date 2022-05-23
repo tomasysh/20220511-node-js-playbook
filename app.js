@@ -41,6 +41,21 @@ app.use(session({
 app.use(connectFlash());
 app.use(csrfProtection());
 
+// NOTE: 取得 User model (如果已登入的話)
+app.use((req, res, next) => {
+    if (!req.session.user) {
+        return next();
+    }
+    User.findByPk(req.session.user.id)
+        .then((user) => {
+            req.user = user;
+            next();
+        })
+        .catch((err) => {
+            console.log('find user by session id error: ', err);
+        })
+});
+
 app.use((req, res, next) => {
     res.locals.pageTitle = 'Book Your Books online';
     res.locals.path = req.url;
@@ -60,9 +75,9 @@ app.use(errorRoutes);
 
 database
     // .sync()
-	.sync({ force: true }) // 和 db 連線職，強制重設 db
+	.sync({ force: true }) // 和 db 連線時，強制重設 db
 	.then((result) => {
-        // Product.bulkCreate(products);
+        Product.bulkCreate(products);
 		app.listen(port, () => {
 			console.log(`Web Server is running on port ${port}`);
 		});
