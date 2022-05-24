@@ -35,6 +35,18 @@ const getCart = (req, res) => {
         })
 };
 
+const getOrders = (req, res, next) => {
+    req.user
+        .getOrders({ include: ['products']})
+        .then((orders) => {
+            console.log('orders', orders)
+            res.render('shop/orders', {
+                orders,
+            });
+        })
+        .catch((err) => console.log(err));
+};
+
 const postCartAddItem = (req, res) => {
     const { productId } = req.body;
     let userCart;
@@ -114,6 +126,7 @@ const postCartDeleteItem = (req, res, next) => {
 module.exports = {
     getIndex,
     getCart,
+    getOrders,
     postCartAddItem,
     postCartDeleteItem,
 };
